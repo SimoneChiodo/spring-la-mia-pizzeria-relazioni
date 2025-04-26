@@ -61,11 +61,11 @@
             th:if="${pizza.getSconti().size() > 0}"
           >
             <h2>Sconti:</h2>
-            <div class="row row-cols-1" th:each="sconti : *{sconti}" th:object="${sconti}">
-              <div class="col">ID: [[*{id}]]</div>
-              <div class="col">Nome: [[*{nome}]]</div>
-              <div class="col">Data inizio: [[*{dataInizio}]]</div>
-              <div class="col">Data fine: [[*{dataFine}]]</div>
+            <div class="row light-shadow border rounded-5 p-3 bg-light" th:each="sconti : *{sconti}" th:object="${sconti}">
+              <div class="col col-12"><b class="fs-4">ID:</b> [[*{id}]]</div>
+              <div class="col col-12"><b class="fs-5">Nome:</b> [[*{nome}]]</div>
+              <div class="col col-6"><b class="fs-5">Data inizio:</b> [[*{dataInizio}]]</div>
+              <div class="col col-6"><b class="fs-5">Data fine:</b> [[*{dataFine}]]</div>
             </div>
           </div>
           
@@ -74,7 +74,8 @@
             class="pizza-detail-container light-shadow border rounded-5 p-4"
             th:unless="${pizza.getSconti().size() > 0}"
           >
-            <h2>Questa pizza non ha sconti!</h2>
+            <h2>Sconti:</h2>
+            <h2 class="text-center">Questa pizza non ha sconti!</h2>
         </div>
 
         <div th:unless="${pizza != null}">
