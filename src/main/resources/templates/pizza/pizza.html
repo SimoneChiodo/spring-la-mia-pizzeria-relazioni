@@ -61,6 +61,12 @@
               <td>[[*{prezzo}]]</td>
               <td>
                 <a
+                  th:href="@{/pizza/{id}/discount(id=${pizza.id})}"
+                  class="btn btn-primary-outline btn-sm"
+                >
+                  <i class="fa-solid fa-percent"></i>
+                </a>
+                <a
                   th:href="@{/pizza/{id}(id=${pizza.id})}"
                   class="btn btn-primary btn-sm"
                 >

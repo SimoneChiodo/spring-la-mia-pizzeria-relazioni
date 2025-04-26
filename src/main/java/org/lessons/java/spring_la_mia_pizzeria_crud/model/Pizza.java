@@ -1,11 +1,14 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -20,15 +23,20 @@ public class Pizza {
   private Integer id;
 
   @NotBlank(message = "Il nome non può essere vuoto")
-  public String nome;
+  private String nome;
 
-  public String descrizione;
+  private String descrizione;
 
-  public String urlImmagine;
+  private String urlImmagine;
 
   @NotNull(message = "Il prezzo non può essere null")
   @Min(value = 0, message = "Il prezzo deve essere maggiore di 0")
-  public BigDecimal prezzo;
+  private BigDecimal prezzo;
+
+  // Sconti
+  @OneToMany(mappedBy = "pizza")
+  // @JoinColumn(name = "pizza_id", nullable = false) // Non serve, perché la relazione è già definita in Discount
+  private List<Discount> sconti;
 
   // Costructors
   public Pizza() {
@@ -43,6 +51,14 @@ public class Pizza {
 
 
   // Getters & Setters
+
+  public List<Discount> getSconti() {
+    return this.sconti;
+  }
+
+  public void setSconti(List<Discount> sconti) {
+    this.sconti = sconti;
+  }
 
   public Integer getId() {
     return this.id;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
+import org.lessons.java.spring_la_mia_pizzeria_crud.model.Discount;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import jakarta.validation.Valid;
 
@@ -115,6 +116,17 @@ public class PizzaController {
     repository.delete(pizza); // DELETE FROM 'pizze' WHERE id = ?
 
     return "redirect:/pizza"; //Ritorno alla index
+  }
+
+  @GetMapping("/pizza/{id}/discount")
+  public String sconto(@PathVariable Integer id, Model model) {
+    Discount sconto = new Discount(); // Creo un nuovo oggetto sconto
+    Pizza pizza = repository.findById(id).get(); // SELECT * FROM 'pizze' WHERE id = ?
+    sconto.setPizza(pizza); // Associo la pizza allo sconto
+
+    model.addAttribute("sconto", sconto); // Aggiungo lo sconto al model
+
+    return "discount/create";
   }
 
 }

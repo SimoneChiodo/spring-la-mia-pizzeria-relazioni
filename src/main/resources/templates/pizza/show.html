@@ -21,39 +21,60 @@
       <div class="container">
         <h1>Pizza Details</h1>
 
-        <!-- Table -->
-        <div
-          class="row pizza-detail-container light-shadow border rounded-5 p-3"
-          th:if="${pizza != null}"
-          th:object="${pizza}"
-        >
-          <div class="col col-7 left-side">
-            <ul class="reset-ul">
-              <li>
-                <h2 scope="col">ID:</h2>
-                <span class="fs-4">[[*{id}]]</span>
-              </li>
-              <li>
-                <h2 scope="col">Nome:</h2>
-                <span class="fs-4">[[*{nome}]]</span>
-              </li>
-              <li>
-                <h2 scope="col">Descrizione:</h2>
-                <span class="fs-4">[[*{descrizione}]]</span>
-              </li>
-              <li>
-                <h2 scope="col">Prezzo:</h2>
-                <span class="fs-4">[[*{prezzo}]]</span>
-              </li>
-            </ul>
+        <div th:if="${pizza != null}" th:object="${pizza}">
+          <!-- Table -->
+          <div
+            class="row pizza-detail-container light-shadow border rounded-5 p-3 mb-4"
+          >
+            <div class="col col-7 left-side">
+              <ul class="reset-ul">
+                <li>
+                  <h2 scope="col">ID:</h2>
+                  <span class="fs-4">[[*{id}]]</span>
+                </li>
+                <li>
+                  <h2 scope="col">Nome:</h2>
+                  <span class="fs-4">[[*{nome}]]</span>
+                </li>
+                <li>
+                  <h2 scope="col">Descrizione:</h2>
+                  <span class="fs-4">[[*{descrizione}]]</span>
+                </li>
+                <li>
+                  <h2 scope="col">Prezzo:</h2>
+                  <span class="fs-4">[[*{prezzo}]]</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col pizza-image-container col-5 right-side">
+              <img
+                th:src="*{urlImmagine}"
+                alt="pizza image"
+                class="rounded-3 pizza-image"
+              />
+            </div>
           </div>
-          <div class="col pizza-image-container col-5 right-side">
-            <img
-              th:src="*{urlImmagine}"
-              alt="pizza image"
-              class="rounded-3 pizza-image"
-            />
+
+          <!-- Discounts -->
+          <div
+            class="pizza-detail-container light-shadow border rounded-5 p-4"
+            th:if="${pizza.getSconti().size() > 0}"
+          >
+            <h2>Sconti:</h2>
+            <div class="row row-cols-1" th:each="sconti : *{sconti}" th:object="${sconti}">
+              <div class="col">ID: [[*{id}]]</div>
+              <div class="col">Nome: [[*{nome}]]</div>
+              <div class="col">Data inizio: [[*{dataInizio}]]</div>
+              <div class="col">Data fine: [[*{dataFine}]]</div>
+            </div>
           </div>
+          
+          <!-- No discount available -->
+          <div
+            class="pizza-detail-container light-shadow border rounded-5 p-4"
+            th:unless="${pizza.getSconti().size() > 0}"
+          >
+            <h2>Questa pizza non ha sconti!</h2>
         </div>
 
         <div th:unless="${pizza != null}">
