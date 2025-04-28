@@ -1,6 +1,7 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.controllers;
 
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Discount;
+import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.DiscountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
 @Controller
 @RequestMapping("/discount")
 public class DiscountController {
-  
+
   //Repository
   @Autowired
   private DiscountRepository discountRepository;
@@ -58,17 +58,27 @@ public class DiscountController {
   // UPDATE
   @PostMapping("/edit/{id}")
   public String update(@PathVariable Integer id, @Valid @ModelAttribute("formSconto") Discount formSconto, BindingResult bindingResult, Model model) {
-      //Controllo eventuali errori di validazione
-      if(bindingResult.hasErrors()) {
-          return "discount/edit";
-      }
+    //Controllo eventuali errori di validazione
+    if(bindingResult.hasErrors()) {
+        return "discount/edit";
+    }
 
-      // Salva le modifiche nel repository
-      discountRepository.save(formSconto); // UPDATE 'sconti' SET nome=?, dataInizio=?, dataFine=? WHERE id=?
+    // Salva le modifiche nel repository
+    discountRepository.save(formSconto); // UPDATE 'sconti' SET nome=?, dataInizio=?, dataFine=? WHERE id=?
 
-      // Redirect alla pagina della pizza associata allo sconto
-      return "redirect:/pizza/" + formSconto.getPizza().getId(); 
+    // Redirect alla pagina della pizza associata allo sconto
+    return "redirect:/pizza/" + formSconto.getPizza().getId(); 
   }
-  
+
+  // DELETE
+  @PostMapping("/delete/{id}")
+  public String delete(@PathVariable Integer id) {
+    Discount sconto = discountRepository.findById(id).get(); // SELECT * FROM 'sconti' WHERE id = ?
+
+    discountRepository.delete(sconto); // DELETE FROM 'sconti' WHERE id = ?
+
+    // Redirect alla pagina della pizza associata allo sconto
+    return "redirect:/pizza/" + sconto.getPizza().getId(); 
+  }
 
 }

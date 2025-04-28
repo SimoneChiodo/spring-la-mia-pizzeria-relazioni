@@ -62,26 +62,26 @@
               <td>
                 <a
                   th:href="@{/pizza/{id}/discount(id=${pizza.id})}"
-                  class="btn btn-primary-outline btn-sm"
+                  class="btn btn-primary-outline btn-sm m-1"
                 >
                   <i class="fa-solid fa-percent"></i>
                 </a>
                 <a
                   th:href="@{/pizza/{id}(id=${pizza.id})}"
-                  class="btn btn-primary btn-sm"
+                  class="btn btn-primary btn-sm m-1"
                 >
                   <i class="fa-solid fa-eye"></i>
                 </a>
                 <a
                   th:href="@{/pizza/edit/{id}(id=${pizza.id})}"
-                  class="btn btn-warning btn-sm"
+                  class="btn btn-warning btn-sm m-1"
                 >
                   <i class="fa-solid fa-pencil"></i>
                 </a>
                 <!-- Il pulsante DELETE apre una modal di conferma -->
                 <button
                   type="button"
-                  class="btn btn-danger btn-sm"
+                  class="btn btn-danger btn-sm m-1"
                   data-bs-toggle="modal"
                   th:data-bs-target="'#delete-modal-' + ${pizza.id}"
                 >
@@ -140,8 +140,5 @@
         </div>
       </div>
     </main>
-
-    <!-- BOOTSTRAP JS -->
-    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

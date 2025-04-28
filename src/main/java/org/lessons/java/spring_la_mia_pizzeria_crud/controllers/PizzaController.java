@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.lessons.java.spring_la_mia_pizzeria_crud.repository.DiscountRepository;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Discount;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
@@ -23,6 +24,9 @@ public class PizzaController {
   
   @Autowired
   private PizzaRepository repository;
+
+  @Autowired
+  private DiscountRepository discountRepository;
 
   // HOME
   @GetMapping()
@@ -113,11 +117,17 @@ public class PizzaController {
   public String delete(@PathVariable Integer id) {
     Pizza pizza = repository.findById(id).get(); // SELECT * FROM 'pizze' WHERE id = ?
 
+    // Elimino tutti gli sconti associati alla pizza // <-- Non serve perché dentro Pizza.java si definisce la relazione "OneToMany" con "CascadeType.REMOVE"
+    // for(Discount sconto : pizza.getSconti()) { // SELECT * FROM 'sconti' WHERE pizza_id = ?
+    //   discountRepository.delete(sconto); // DELETE FROM 'sconti' WHERE id = ?
+    // }
+
     repository.delete(pizza); // DELETE FROM 'pizze' WHERE id = ?
 
     return "redirect:/pizza"; //Ritorno alla index
   }
 
+  // DISCOUNT CREATE 
   @GetMapping("/pizza/{id}/discount")
   public String sconto(@PathVariable Integer id, Model model) {
     Discount sconto = new Discount(); // Creo un nuovo oggetto sconto
