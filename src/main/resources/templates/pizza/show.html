@@ -57,15 +57,36 @@
 
           <!-- Discounts -->
           <div
-            class="pizza-detail-container light-shadow border rounded-5 p-4"
+            class="pizza-detail-container light-shadow border rounded-5 p-4 mb-5"
             th:if="${pizza.getSconti().size() > 0}"
           >
             <h2>Sconti:</h2>
-            <div class="row light-shadow border rounded-5 p-3 bg-light" th:each="sconti : *{sconti}" th:object="${sconti}">
-              <div class="col col-12"><b class="fs-4">ID:</b> [[*{id}]]</div>
-              <div class="col col-12"><b class="fs-5">Nome:</b> [[*{nome}]]</div>
-              <div class="col col-6"><b class="fs-5">Data inizio:</b> [[*{dataInizio}]]</div>
-              <div class="col col-6"><b class="fs-5">Data fine:</b> [[*{dataFine}]]</div>
+            <div class="light-shadow border rounded-2 p-3 bg-light d-flex mb-4" th:each="sconto : *{sconti}" th:object="${sconto}">
+              <!-- Dati -->
+              <div class="row flex-grow-1">
+                <div class="col col-12">
+                  <b class="fs-4">ID:</b> [[*{id}]]  
+                </div>
+                <div class="col col-12"><b class="fs-5">Nome:</b> [[*{nome}]]</div>
+                <div class="col col-6"><b class="fs-5">Data inizio:</b> [[*{dataInizio}]]</div>
+                <div class="col col-6"><b class="fs-5">Data fine:</b> [[*{dataFine}]]</div>
+              </div>
+              <!-- Pulsanti -->
+              <div>
+                  <!-- Pulsante Modifica -->
+                  <a th:href=@{/discount/edit/{id}(id=${sconto.id})} class="btn btn-warning btn-sm me-2">
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+              </div>
+            </div>
+            
+            <div class="w-100 text-center">
+              <a
+              th:href=@{/pizza/{id}/discount(id=${pizza.id})}
+              class="btn btn-outline-success"
+              >
+                <h3>+ Crea un nuovo sconto</h3>
+              </a>
             </div>
           </div>
           
