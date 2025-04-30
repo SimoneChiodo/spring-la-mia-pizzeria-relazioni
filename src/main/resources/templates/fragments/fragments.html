@@ -69,17 +69,17 @@
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{/pizza/create}"
-                  th:classappend="${currentPage == 'crea'} ? 'active' : ''"
-                  >Crea pizza</a
+                  th:href="@{xxx}"
+                  th:classappend="${currentPage == 'pizze'} ? 'active' : ''"
+                  >Elenco Ingredienti</a
                 >
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{/pizza/{id}/discount(id=1)}"
-                  th:classappend="${currentPage == 'crea'} ? 'active' : ''"
-                  >Crea sconto</a
+                  th:href="@{/pizza/create}"
+                  th:classappend="${currentPage == 'creaPizza'} ? 'active' : ''"
+                  >Crea pizza</a
                 >
               </li>
             </ul>
