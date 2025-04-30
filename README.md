@@ -19,7 +19,7 @@ Accanto ad ogni offerta speciale è previsto un bottone che mi porterà a una pa
 
 # Giorno 4
 
-Aggiungiamo una nuova fuzionalità per la nostra pizzeria: gli ingredienti!
+Aggiungiamo una nuova funzionalità per la nostra pizzeria: gli ingredienti!
 
 Ogni pizza può avere più ingredienti, e ogni ingrediente può essere collegato a più pizze.
 

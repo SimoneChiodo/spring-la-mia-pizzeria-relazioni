@@ -69,8 +69,8 @@
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  th:href="@{xxx}"
-                  th:classappend="${currentPage == 'pizze'} ? 'active' : ''"
+                  th:href="@{/ingredient}"
+                  th:classappend="${currentPage == 'ingredienti'} ? 'active' : ''"
                   >Elenco Ingredienti</a
                 >
               </li>
@@ -80,6 +80,14 @@
                   th:href="@{/pizza/create}"
                   th:classappend="${currentPage == 'creaPizza'} ? 'active' : ''"
                   >Crea pizza</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  th:href="@{/ingredient/create}"
+                  th:classappend="${currentPage == 'creaIngrediente'} ? 'active' : ''"
+                  >Crea ingrediente</a
                 >
               </li>
             </ul>

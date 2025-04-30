@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.DiscountRepository;
+import org.lessons.java.spring_la_mia_pizzeria_crud.repository.IngredientRepository;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Discount;
+import org.lessons.java.spring_la_mia_pizzeria_crud.model.Ingredient;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import jakarta.validation.Valid;
 
@@ -27,6 +29,9 @@ public class PizzaController {
 
   @Autowired
   private DiscountRepository discountRepository;
+
+  @Autowired
+  private IngredientRepository ingredientRepository;
 
   // HOME
   @GetMapping()
@@ -73,6 +78,10 @@ public class PizzaController {
 
     model.addAttribute("pizza", pizza);
 
+    //Aggiungo gli ingredienti da selezionare
+    List<Ingredient> ingredienti = ingredientRepository.findAll();
+    model.addAttribute("ingredienti", ingredienti);
+
     return "pizza/create";
   }
 
@@ -96,6 +105,10 @@ public class PizzaController {
 
     model.addAttribute("pizza", pizza);
 
+    //Aggiungo gli ingredienti da selezionare
+    List<Ingredient> ingredienti = ingredientRepository.findAll();
+    model.addAttribute("ingredienti", ingredienti);
+
     return "pizza/edit";
   }
   
@@ -117,7 +130,7 @@ public class PizzaController {
   public String delete(@PathVariable Integer id) {
     Pizza pizza = repository.findById(id).get(); // SELECT * FROM 'pizze' WHERE id = ?
 
-    // Elimino tutti gli sconti associati alla pizza // <-- Non serve perché dentro Pizza.java si definisce la relazione "OneToMany" con "CascadeType.REMOVE"
+    // Elimino tutti gli sconti associati alla pizza // <-- Non serve perché dentro Pizza.java ho definito la relazione "OneToMany" con "CascadeType.REMOVE"
     // for(Discount sconto : pizza.getSconti()) { // SELECT * FROM 'sconti' WHERE pizza_id = ?
     //   discountRepository.delete(sconto); // DELETE FROM 'sconti' WHERE id = ?
     // }

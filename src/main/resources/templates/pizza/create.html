@@ -126,6 +126,21 @@
             </div>
           </div>
 
+          <!-- Seleziona Ingredienti -->
+          <div class="col col-12 mb-3">
+            <div class="form-check" th:each="ingredient : ${ingredienti}">
+              <input
+                th:class="'input-' + ${ingredient.id}"
+                type="checkbox"
+                th:name=${ingredient.nome}
+                th:id="'ingredient-' + ${ingredient.id}"
+                th:value="${ingredient.id}"
+                th:field="${pizza.ingredienti}"
+                />
+                <label th:for="'input-' + ${ingredient.id}" class="form-check-label" th:text="${ingredient.nome}"></label>
+            </div>
+          </div>
+
           <!-- SUBMIT -->
           <div class="col col-12 d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Create</button>

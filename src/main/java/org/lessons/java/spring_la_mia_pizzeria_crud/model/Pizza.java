@@ -8,6 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -38,6 +41,13 @@ public class Pizza {
   // @JoinColumn(name = "pizza_id", nullable = false) // Non serve, perché la relazione è già definita in Discount
   private List<Discount> sconti;
 
+  // Ingredienti
+  @ManyToMany
+  @JoinTable(name = "pizza_ingrediente",
+      joinColumns = @JoinColumn(name = "pizza_id"),
+      inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
+  private List<Ingredient> ingredienti;
+
   // Costructors
   public Pizza() {
   }
@@ -51,6 +61,14 @@ public class Pizza {
 
 
   // Getters & Setters
+
+  public List<Ingredient> getIngredienti() {
+    return this.ingredienti;
+  }
+
+  public void setIngredienti(List<Ingredient> ingredienti) {
+    this.ingredienti = ingredienti;
+  }
 
   public List<Discount> getSconti() {
     return this.sconti;
