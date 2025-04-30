@@ -31,12 +31,12 @@
         <!-- Filter Form -->
         <form
           class="p-4 border light-shadow rounded-5 mb-4"
-          action="/ingredient/search"
+          th:action=@{/ingredient/search}
           method="GET"
         >
           <div class="mb-3">
             <label for="input" class="form-label">Cerca per nome</label>
-            <input type="text" class="form-control" id="input" name="title" />
+            <input type="text" class="form-control" id="input" name="nome" />
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>

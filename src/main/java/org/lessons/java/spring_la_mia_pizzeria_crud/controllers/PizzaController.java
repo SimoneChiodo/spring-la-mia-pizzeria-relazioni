@@ -122,7 +122,8 @@ public class PizzaController {
     // Se non ci sono errori, aggiorno la pizza nel DB
     repository.save(formPizza); // INSERT INTO 'pizze' (nome, descrizione, urlImmagine, prezzo) VALUES (?, ?, ?, ?)
 
-    return "redirect:/pizza"; //Ritorno alla index
+    //Ritorno alla pagina della pizza modificata
+    return "redirect:/pizza/" + formPizza.getId(); 
   }
 
   // DELETE

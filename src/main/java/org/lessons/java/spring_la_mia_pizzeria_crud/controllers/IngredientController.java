@@ -1,5 +1,7 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.controllers;
 
+import java.util.List;
+
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Ingredient;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.IngredientRepository;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -29,6 +32,16 @@ public class IngredientController {
 
     return "ingredient/index";
   } 
+  
+  // SEARCH
+  @GetMapping("/search")
+  public String search(@RequestParam(name = "nome") String nome, Model model) {
+    List<Ingredient> ingredienti = ingredientRepository.findByNomeContainingIgnoreCase(nome); // SELECT * FROM 'ingredienti' WHERE nome LIKE '%nome%'
+    
+    model.addAttribute("ingredients", ingredienti);
+
+    return "ingredient/index";
+  }
 
   // CREATE
   @GetMapping("/create")
